@@ -10,6 +10,16 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Reference",
+"class": "DungeonStrategy",
+"language": "GDScript",
+"path": "res://DungeonStrategy.gd"
+}, {
+"base": "DungeonStrategy",
+"class": "StandardDungeonGenerator",
+"language": "GDScript",
+"path": "res://StandardGeneration.gd"
+}, {
+"base": "Reference",
 "class": "Three",
 "language": "GDScript",
 "path": "res://Three.gd"
@@ -20,6 +30,8 @@ _global_script_classes=[ {
 "path": "res://ThreeContainer.gd"
 } ]
 _global_script_class_icons={
+"DungeonStrategy": "",
+"StandardDungeonGenerator": "",
 "Three": "",
 "ThreeContainer": ""
 }

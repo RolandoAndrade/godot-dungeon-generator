@@ -39,4 +39,4 @@ format = 1
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
 current = true
-zoom = Vector2( 8, 8 )
+zoom = Vector2( 3, 3 )
