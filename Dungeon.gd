@@ -16,8 +16,10 @@ func create_dungeon2():
 
 func create_dungeon_2():
 	tilemap.clear()
-	var d = StandardDungeonGenerator.new(Vector2(3,2))
-	d.generate_dungeon(Rect2(0,0,52,28), -6)
+	var M = ((randi() % 3) + 1) * 3
+	var d = StandardDungeonGenerator.new(Vector2(M,M*2/3))
+	var rooms = randi() % (M * M * 2 / 3 + 1)
+	d.generate_dungeon(Rect2(0,0,54,32), rooms)
 	var dungeon = d.dungeon
 	for i in range(len(dungeon)):
 		for j in range(len(dungeon[i])):

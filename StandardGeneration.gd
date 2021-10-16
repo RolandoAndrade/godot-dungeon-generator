@@ -39,13 +39,17 @@ func _get_rooms_order(
 	return to_create
 
 func _create_room(top: int, left: int, max_width: int, max_height: int):
-	var width = randi() % (max_width - MINIMUM_ROOM_WIDTH) + MINIMUM_ROOM_WIDTH
-	var height = randi() % (max_height - MINIMUM_ROOM_HEIGHT) + MINIMUM_ROOM_HEIGHT
-	var padding_left = max_width - width
-	var padding_top = max_height - height
+	var width = max_width
+	var height = max_height
+	if MINIMUM_ROOM_WIDTH < max_width:
+		width = randi() % (max_width - MINIMUM_ROOM_WIDTH) + MINIMUM_ROOM_WIDTH
+	if MINIMUM_ROOM_HEIGHT < max_height:
+		height = randi() % (max_height - MINIMUM_ROOM_HEIGHT) + MINIMUM_ROOM_HEIGHT
+	var padding_left = (max_width - width) / 2
+	var padding_top = (max_height - height) / 2
 	for i in height:
 		for j in width:
-			dungeon[top + i][left + j] = 1
+			dungeon[top + padding_top + i][left + padding_left + j] = 1
 			
 func _create_dummy_room(top: int, left: int, max_width: int, max_height: int):
 	var x = max_width / 2 + left
@@ -70,7 +74,9 @@ func _place_rooms(width: int, height: int, density: int):
 					room_max_width, room_max_height)
 	
 func _connect_rooms():
-	pass
+	for i in _M:
+		for j in _N:
+			pass
 		
 func _create_dead_ends(density: int):
 	pass
