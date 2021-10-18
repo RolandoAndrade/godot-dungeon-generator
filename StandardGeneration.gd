@@ -121,10 +121,15 @@ func _select_collinear_points_parallel_to(a: Room, b: Room, direction: String):
 	}
 	
 func _connect_points(a: Room, b: Room, points: Dictionary, direction: String):
-	for i in range(points.x1, points.x2 + 1):
+	var min_x = min(points.x1, points.x2)
+	var max_x = max(points.x1, points.x2)
+	var min_y = min(points.y1, points.y2)
+	var max_y = max(points.y1, points.y2)
+	
+	for i in range(min_x, max_x + 1):
 		dungeon[points.y1][i] = 1
 		dungeon[points.y2][i] = 1
-	for i in range(points.y1, points.y2 + 1):
+	for i in range(min_y, max_y  + 1):
 		dungeon[i][points.x1] = 1
 		dungeon[i][points.x2] = 1
 		
@@ -138,6 +143,7 @@ func _connect_points(a: Room, b: Room, points: Dictionary, direction: String):
 			dungeon[points.y1][i] = 1
 		for i in range(points.x1, b.get_left()):
 			dungeon[points.y2][i] = 1
+
 	
 func _create_corridor_between(a: Room, b: Room, direction: String):
 	var points = _select_collinear_points_parallel_to(a, b, direction)
