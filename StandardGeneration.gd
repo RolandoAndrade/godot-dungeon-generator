@@ -149,14 +149,30 @@ func _create_corridor_between(a: Room, b: Room, direction: String):
 	var points = _select_collinear_points_parallel_to(a, b, direction)
 	_connect_points(a, b, points, direction)
 	
+func _merge_rooms(a: Room, b: Room):
+	var min_x = min(a.get_left(), b.get_left())
+	var max_x = max(a.get_right(), b.get_right())
+	var min_y = min(a.get_top(), b.get_top())
+	var max_y = max(a.get_bottom(), b.get_bottom())
+	
+	for x in range(min_x, max_x + 1):
+		for y in range(min_y, max_y + 1):
+			dungeon[y][x] = 1
+	
 func _connect_rooms():
 	for i in _N:
 		for j in _M:
 			var room = rooms[i][j]
 			if i > 0:
-				_create_corridor_between(rooms[i-1][j], room, "vertical")
+				if randf() < 0.05:
+					_merge_rooms(rooms[i-1][j], room)
+				else:
+					_create_corridor_between(rooms[i-1][j], room, "vertical")
 			if j > 0:
-				_create_corridor_between(rooms[i][j-1], room, "horizontal")
+				if randf() < 0.05:
+					_merge_rooms(rooms[i][j-1], room)
+				else:
+					_create_corridor_between(rooms[i][j-1], room, "horizontal")
 		
 func _create_dead_ends(density: int):
 	pass
